@@ -22,27 +22,9 @@ The goal is to eventually expand this into a fully functional e-commerce platfor
 - **Environment**: Python 3.10, virtualenv
 
 ## Project Structure
-ecommerce/
-├── ecommerce/          # Project settings and configuration
-│   ├── init.py
-│   ├── settings.py
-│   ├── urls.py
-│   └── wsgi.py
-├── products/          # App for product-related functionality
-│   ├── migrations/    # Database migrations
-│   ├── templates/     # HTML templates
-│   │   └── products/
-│   │       ├── home.html
-│   │       └── products.html
-│   ├── init.py
-│   ├── admin.py
-│   ├── apps.py
-│   ├── models.py      # Product model
-│   ├── tests.py
-│   └── views.py       # Home and Products views
-├── media/             # Previously used for local images (now on S3)
-├── manage.py          # Django management script
-└── README.md          # This file
+
+![image](https://github.com/user-attachments/assets/59d17adc-3d20-4982-b742-25cffb0aaf69)
+
 
 ## Setup Instructions
 
