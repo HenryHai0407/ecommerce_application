@@ -144,6 +144,12 @@ AWS_S3_REGION_NAME = 'eu-north-1'  # Match your bucket’s region
 AWS_S3_FILE_OVERWRITE = False  # Prevents overwriting files with the same name
 AWS_DEFAULT_ACL = 'public-read'  # Makes uploaded files publicly readable
 AWS_S3_SIGNATURE_VERSION = 's3v4'  # Required for some regions
+AWS_STORAGE_BUCKET_NAME = 'haidebucket'
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'  # For generating URLs
 
 # Tell Django to use S3 for media files
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+# Media settings (for clarity)
+MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/'  # Base URL for media files
+MEDIA_ROOT = ''  # Leave empty when using S3
