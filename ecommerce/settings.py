@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'products'
+    'products',
+    'storages'
 ]
 
 MIDDLEWARE = [
@@ -130,6 +131,19 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Set up Media Files
 import os
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+#------- Change from LOCAL STORAGE to AWS S3
+# AWS S3 Settings
+from decouple import config
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')  # From IAM user
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')  # From IAM user
+AWS_STORAGE_BUCKET_NAME = 'haidebucket'  # Your bucket name
+AWS_S3_REGION_NAME = 'eu-north-1'  # Match your bucket’s region
+AWS_S3_FILE_OVERWRITE = False  # Prevents overwriting files with the same name
+AWS_DEFAULT_ACL = 'public-read'  # Makes uploaded files publicly readable
+AWS_S3_SIGNATURE_VERSION = 's3v4'  # Required for some regions
+
+# Tell Django to use S3 for media files
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
