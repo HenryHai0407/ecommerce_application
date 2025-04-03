@@ -1,26 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Products</title>
-</head>
-<body>
-    <h1>Products</h1>
-    <form method="get">
-        <input type="text" name="q" value="{{ query }}" placeholder="Search products">
-        <button type="submit">Search</button>
+{% extends "base.html" %}
+
+{% block title %}Products - E-commerce{% endblock %}
+
+{% block content %}
+    <h1 class="text-center mb-4">Products</h1>
+
+    <form method="get" class="d-flex justify-content-center mb-4">
+        <input type="text" name="q" value="{{ query }}" class="form-control w-25 me-2" placeholder="Search products">
+        <button type="submit" class="btn btn-primary">Search</button>
     </form>
-    <ul>
+
+    <div class="row">
         {% for product in products %}
-            <li>
-                <h2>{{ product.name }}</h2>
-                <p>{{ product.description }}</p>
-                <p>Price: ${{ product.price }}</p>
-                {% if product.image %}
-                    <img src="{{ product.image.url }}" alt="{{ product.name }}" width="100">
-                {% endif %}
-            </li>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">{{ product.description }}</p>
+                        <p class="card-text"><strong>Price: ${{ product.price }}</strong></p>
+                        <a href="#" class="btn btn-success">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
         {% endfor %}
-    </ul>
-</body>
-</html>
+    </div>
+{% endblock %}
