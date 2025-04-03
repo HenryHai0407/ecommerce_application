@@ -56,7 +56,7 @@ ROOT_URLCONF = 'ecommerce.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR/"products/templates/products"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -78,11 +78,11 @@ WSGI_APPLICATION = 'ecommerce.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ecommerce_hainguyen',       # e.g., 'ecommerce_db'
+        'NAME': 'ecommerce_db',       # e.g., 'ecommerce_db'
         'USER': 'admin',       # e.g., 'admin'
-        'PASSWORD': 'Haiadmin123+',
-        'HOST': 'hainguyen-database-ecommerce.creiuikqw9ho.eu-north-1.rds.amazonaws.com',        # e.g., 'your-db-instance.abcdef123456.us-east-1.rds.amazonaws.com'
-        'PORT': '3306',
+        'PASSWORD': 'admin123+',
+        'HOST': '127.0.0.1',        # e.g., 'your-db-instance.abcdef123456.us-east-1.rds.amazonaws.com'
+        'PORT': '3307',
     }
 }
 
@@ -123,6 +123,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [BASE_DIR/ "products/static"]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -131,25 +132,28 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Set up Media Files
 import os
-# MEDIA_URL = '/media/'
-# MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+# Ensure the media folder exists
+if not os.path.exists(MEDIA_ROOT):
+    os.makedirs(MEDIA_ROOT)
 
 #------- Change from LOCAL STORAGE to AWS S3
 # AWS S3 Settings
-from decouple import config
-AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')  # From IAM user
-AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')  # From IAM user
-AWS_STORAGE_BUCKET_NAME = 'haidebucket'  # Your bucket name
-AWS_S3_REGION_NAME = 'eu-north-1'  # Match your bucket’s region
-AWS_S3_FILE_OVERWRITE = False  # Prevents overwriting files with the same name
-AWS_DEFAULT_ACL = 'public-read'  # Makes uploaded files publicly readable
-AWS_S3_SIGNATURE_VERSION = 's3v4'  # Required for some regions
-AWS_STORAGE_BUCKET_NAME = 'haidebucket'
-AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'  # For generating URLs
+# from decouple import config
+# AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')  # From IAM user
+# AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')  # From IAM user
+# AWS_STORAGE_BUCKET_NAME = 'haidebucket'  # Your bucket name
+# AWS_S3_REGION_NAME = 'eu-north-1'  # Match your bucket’s region
+# AWS_S3_FILE_OVERWRITE = False  # Prevents overwriting files with the same name
+# AWS_DEFAULT_ACL = 'public-read'  # Makes uploaded files publicly readable
+# AWS_S3_SIGNATURE_VERSION = 's3v4'  # Required for some regions
+# AWS_STORAGE_BUCKET_NAME = 'haidebucket'
+# AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'  # For generating URLs
 
-# Tell Django to use S3 for media files
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# # Tell Django to use S3 for media files
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-# Media settings (for clarity)
-MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/'  # Base URL for media files
-MEDIA_ROOT = ''  # Leave empty when using S3
+# # Media settings (for clarity)
+# MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/'  # Base URL for media files
+# MEDIA_ROOT = ''  # Leave empty when using S3
