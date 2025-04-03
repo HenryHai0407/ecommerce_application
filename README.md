@@ -22,60 +22,9 @@ The goal is to eventually expand this into a fully functional e-commerce platfor
 - **Environment**: Python 3.10, virtualenv
 
 ## Project Structure
-Let’s update your README.md file to reflect the changes we’ve made today—specifically, migrating media storage to AWS S3 and ensuring the app works with RDS. I’ll also upgrade the titles to proper Markdown headings (using # for levels) to improve readability. Here’s the revised version with updates and proper formatting:
 
-markdown
+![image](https://github.com/user-attachments/assets/59d17adc-3d20-4982-b742-25cffb0aaf69)
 
-Collapse
-
-Wrap
-
-Copy
-# E-commerce Web Application (In Development)
-
-## Overview
-
-This is a simple e-commerce web application built with Django and Python, designed as a hands-on learning project. The app allows users to browse products, search for items, and view details. It’s currently in development, with two main pages implemented: a Home page and a Products page. The backend uses a MySQL database hosted on AWS RDS for persistent storage and now integrates AWS S3 for media file storage.
-
-The goal is to eventually expand this into a fully functional e-commerce platform with features like a shopping cart and payment integration.
-
-## Features
-
-- **Home Page**: A welcoming landing page with a link to the Products page.
-- **Products Page**: Displays a list of all products with a search bar to filter by name or description.
-- **Database**: Stores product data (name, description, price, image) in a MySQL database on AWS RDS.
-- **Media Support**: Product images are now stored and served from AWS S3, replacing local storage.
-
-## Tech Stack
-
-- **Backend**: Django (Python web framework)
-- **Database**: MySQL (hosted on AWS RDS)
-- **Storage**: AWS S3 (for media files)
-- **Frontend**: Basic HTML templates (to be enhanced with CSS/JavaScript later)
-- **Environment**: Python 3.10, virtualenv
-
-## Project Structure
-ecommerce/
-├── ecommerce/          # Project settings and configuration
-│   ├── init.py
-│   ├── settings.py
-│   ├── urls.py
-│   └── wsgi.py
-├── products/          # App for product-related functionality
-│   ├── migrations/    # Database migrations
-│   ├── templates/     # HTML templates
-│   │   └── products/
-│   │       ├── home.html
-│   │       └── products.html
-│   ├── init.py
-│   ├── admin.py
-│   ├── apps.py
-│   ├── models.py      # Product model
-│   ├── tests.py
-│   └── views.py       # Home and Products views
-├── media/             # Previously used for local images (now on S3)
-├── manage.py          # Django management script
-└── README.md          # This file
 
 ## Setup Instructions
 
