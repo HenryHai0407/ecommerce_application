@@ -10,6 +10,7 @@
                 <th>Product</th>
                 <th>Quantity</th>
                 <th>Subtotal</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -18,12 +19,17 @@
                 <td>{{ item.product.name }}</td>
                 <td>{{ item.quantity }}</td>
                 <td>${{ item.subtotal }}</td>
+                <td>
+                    <a href="{% url 'increase_quantity' item.product.id %}" class="btn btn-sm btn-outline-success">+</a>
+                    <a href="{% url 'decrease_quantity' item.product.id %}" class="btn btn-sm btn-outline-warning">-</a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
     <h3>Total: ${{ total }}</h3>
     <a href="{% url 'payment' %}" class="btn btn-success">Proceed to Payment</a>
+    <a href="{% url 'clear_cart' %}" class="btn btn-danger">Cancel</a>
     {% else %}
     <p>Your cart is empty.</p>
     {% endif %}

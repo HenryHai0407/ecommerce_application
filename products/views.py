@@ -47,3 +47,32 @@ def view_cart(request):
             }
         )
     return render(request, 'products/cart.html', {"cart_items": cart_items, "total": total})
+
+def decrease_quantity(request, product_id):
+    cart = request.session.get('cart', {})
+    if str(product_id) in cart:
+        # Decrease only if quantity is greater than 1; if it's 1, you might want to remove it
+        if cart[str(product_id)] > 1:
+            cart[str(product_id)] -= 1
+        else:
+            # Optionally, remove product if quantity goes to 0
+            del cart[str(product_id)]
+    request.session['cart'] = cart
+    return redirect('view_cart')
+
+def increase_quantity(request, product_id):
+    cart = request.session.get('cart', {})
+    # Increase the quantity for the product
+    if str(product_id) in cart:
+        cart[str(product_id)] += 1
+    else:
+        cart[str(product_id)] = 1
+    request.session['cart'] = cart
+    return redirect('view_cart')
+
+def clear_cart(request):
+    if 'cart' in request.session:
+        del request.session['cart']
+    return redirect('products')  # or wherever you want to redirect the user
+
+
