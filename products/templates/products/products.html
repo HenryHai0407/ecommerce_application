@@ -22,7 +22,7 @@
                         <p class="card-text">{{ product.description }}</p>
                         <p class="card-text"><strong>Price: ${{ product.price }}</strong></p>
                         <p class="card-text">Quantity: {{ product.quantity }}</p>
-                        <a href="#" class="btn btn-success">Add to Cart</a>
+                        <a href="{% url 'add_to_cart' product.id %}" class="btn btn-success">Add to Cart</a>
                     </div>
                 </div>
             </div>
