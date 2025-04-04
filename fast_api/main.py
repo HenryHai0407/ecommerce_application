@@ -1,6 +1,6 @@
 from typing import List
 from fastapi import FastAPI, Depends, HTTPException, Query
-from sqlalchemy import create_engine, Column, Integer, String
+from sqlalchemy import create_engine, Column, Integer, String, func
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session
 from pydantic import BaseModel
@@ -70,3 +70,39 @@ def get_product(product_id: int, db: Session = Depends(get_db)):
 
 ### QUERY RESULT:
 # http://127.0.0.1:8000/products/?skip=0&limit=2 for example with SKIP: 0 and LIMIT: 2
+
+### OrderItem class
+class OrderItem(Base):
+    __tablename__ = "orders_orderitem"
+
+    id = Column(Integer, primary_key=True, index=True)
+    order_id = Column(Integer)
+    product_id = Column(Integer)
+    quantity = Column(Integer)
+    price = Column(Integer) # price at time of order
+
+class ProductSales(BaseModel):
+    product_id : int
+    name: str
+    total_sold: int
+
+    class Config:
+        orm_mode = True
+
+
+# API Endpoint for aggregation and join
+@app.get("/statistics/best-selling", response_model=List[ProductSales])
+def best_selling_products(db: Session = Depends(get_db)):
+    # Join Product and OrderItem and group by Product.id
+    results = (
+        db.query(
+            Product.id.label("product_id"),
+            Product.name,
+            func.sum(OrderItem.quantity).label("total_sold")
+        )
+        .join(OrderItem, Product.id == OrderItem.product_id)
+        .group_by(Product.id)
+        .order_by(func.sum(OrderItem.quantity).desc())
+        .all()
+    )
+    return results
