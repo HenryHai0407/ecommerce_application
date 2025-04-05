@@ -24,6 +24,7 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="{% url 'products' %}">Products</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a></li>
+<<<<<<< HEAD
                     
                     {% if user.is_authenticated %}
                         <li class="nav-item">
@@ -41,11 +42,17 @@
                         <li class="nav-item"><a class="nav-link" href="{% url 'accounts:login' %}">Login</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'accounts:register' %}">Register</a></li>
                     {% endif %}
+=======
+>>>>>>> origin/master
                 </ul>
             </div>
         </div>
     </nav>
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin/master
     <div class="container mt-4">
         {% block content %}{% endblock %}
     </div>

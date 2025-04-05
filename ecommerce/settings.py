@@ -39,6 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'products',
     'orders',
+<<<<<<< HEAD
+=======
+    'rest_framework',
+    'rest_framework_simplejwt.token_blacklist',
+>>>>>>> origin/master
 ]
 
 MIDDLEWARE = [
@@ -160,4 +165,22 @@ if not os.path.exists(MEDIA_ROOT):
 
 
 # ----------- 
+<<<<<<< HEAD
 LOGIN_REDIRECT_URL = 'home'
+=======
+# Rest Framework
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ROTATE_REFRESH_TOKENS': False,
+    'BLACKLIST_AFTER_ROTATION': True,
+}
+>>>>>>> origin/master
