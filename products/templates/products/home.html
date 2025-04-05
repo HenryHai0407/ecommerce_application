@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}Home - E-commerce{% endblock %}
+
+{% block content %}
+    <div class="text-center">
+        <h1 class="display-4">Welcome to Our E-commerce Site </h1>
+        <a href="{% url 'products' %}" class="btn btn-primary mt-3">View Products</a>
+    </div>
+{% endblock %}
