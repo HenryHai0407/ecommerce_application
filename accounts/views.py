@@ -10,7 +10,8 @@ def register(request):
         if form.is_valid():
             form.save()
             messages.success(request, "Your account has been created. You can now log in.")
-            return redirect("accounts:login")
+            return redirect("accounts:login") # Remember to add "accounts:login" instead of "login" only
     else:
         form = RegistrationForm()
     return render(request, "products/register.html", {"form": form})
+
