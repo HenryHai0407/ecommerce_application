@@ -24,11 +24,28 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="{% url 'products' %}">Products</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a></li>
+                    
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <span class="navbar-text text-white me-2">
+                                Welcome, {{ user.username }}!
+                            </span>
+                        </li>
+                        <li class="nav-item">
+                            <form method="POST" action="{% url 'accounts:logout' %}" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-link nav-link" style="display:inline; padding: 0; color: #fff;">Logout</button>
+                            </form>
+                        </li>
+                    {% else %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'accounts:login' %}">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'accounts:register' %}">Register</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
     </nav>
-
+    
     <div class="container mt-4">
         {% block content %}{% endblock %}
     </div>

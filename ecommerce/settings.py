@@ -39,8 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'products',
     'orders',
-    'rest_framework',
-    'rest_framework_simplejwt.token_blacklist',
 ]
 
 MIDDLEWARE = [
@@ -162,3 +160,4 @@ if not os.path.exists(MEDIA_ROOT):
 
 
 # ----------- 
+LOGIN_REDIRECT_URL = 'home'
